@@ -35,7 +35,7 @@ To create a backup, make a POST request with the following parameters:
 Example API call using curl:
 
 ```bash
-curl -X POST "https://your-cloud-function-url" -d "source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"
+curl -X POST "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"
 
 Example API call using Cloud Scheduler:
 
