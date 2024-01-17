@@ -226,24 +226,27 @@ source_file_share_name: The name of the source file share.
 
 Example API call using curl: <br />
 
-**curl -X POST "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"**
+**curl -X POST "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"** <br />
+
 <br />
 
 Example list backups REST API call using curl:
 <br />
 
-**curl -X GET "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name"**
+**curl -X GET "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name"** <br />
+
 <br />
 
 <br />
 To delete the backups post retention, make a GET request with the following parameters:
 <br />
 
-- `retention_days`: share the retention days in numeric value.
+retention_days: share the retention days in numeric value.
 <br />
 
 Example delete backups REST API call using curl:
 
-**curl -X DELETE "https://your-cloud-function-url" -H "Content-Type: application/json" -d "retention_days=numeric-value"**
+**curl -X DELETE "https://your-cloud-function-url" -H "Content-Type: application/json" -d "retention_days=numeric-value"** <br />
+
 <br />
 <br />
