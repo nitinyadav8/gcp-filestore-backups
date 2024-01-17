@@ -25,10 +25,10 @@ The solution leverages Cloud Function and Cloud Scheduler to automate the proces
 ● on-demand Filestore backup creation <br />
 
 
-● checking the status of the latest backup and <br />
+● list the number of available backups and <br />
 
 
-● discarding any old backups beyond a certain number of days **[USING SEPARETE CLOUD FUNCTION FOR BACKUPS DELETION - CODE IS UNDER TESTING TO HAVE ALL FUNCTIONALITY WITHIN A SINGLE CLOUD FUNCTION]** <br />
+● discarding any old backups beyond retention <br />
 
 
 <br />
@@ -65,13 +65,13 @@ A Cloud Function will be created with an HTTP trigger to interact with the Googl
 Cloud Scheduler will be leveraged to invoke Cloud Function. Cloud Scheduler Jobs will be created to schedule to do the following: <br />
 
 
-● create a new on-demand backups using the Cloud Function at a fixed schedule (e.g. once every 2 hours etc.) <br />
+● create a new on-demand backups using the Cloud Function at a fixed schedule (e.g. once every 4 hours etc.) <br />
 
 
-● fetch the status of the last backup at a fixed schedule (This is not mandatory) <br />
+● fetch the list of backups available for the instance at a fixed schedule (This is not mandatory) <br />
 
 
-● discard older backups again at a fixed schedule once the retention is over (e.g. every 12 hours) <br />
+● discard older backups post retention at a fixed schedule (e.g. every 12 hours) <br />
 
 
 <br />
@@ -185,15 +185,29 @@ gcloud scheduler jobs create http **fsbackupschedule** \
 
 <br />
 
-2. **Schedule to identify backups for deletion once retention is over every 12 hours**:<br />
+2. **Schedule to list of backups for the Filestore instance every 4 hours and 30 minutes**:<br />
+<br />
+
+gcloud scheduler jobs create http **fsbackuplistchedule** \
+    --schedule "30 */4 * * *" \
+    --http-method=GET \
+    --uri=**https://your-cloud-function-url?source_instance_name=your-instance-name** \
+    --oidc-service-account-email=**SERVICE ACCOUNT CREATED EARLIER**    \
+    --oidc-token-audience=**https://your-cloud-function-url** \
+    --oidc-token-header=**"Content-Type: application/json"**
+
+<br />
+
+3. **Schedule to delete the backups once retention of 7 days is over every 12 hours**:<br />
 <br />
 
 gcloud scheduler jobs create http **fsbackupdeleteschedule** \
     --schedule "0 */12 * * *" \
     --http-method=DELETE \
-    --uri=**https://your-cloud-function-url?source_instance_name=your-instance-name&source_file_share_name=your-file-share-name** \
+    --uri=**https://your-cloud-function-url?retention_days=7** \
     --oidc-service-account-email=**SERVICE ACCOUNT CREATED EARLIER**    \
-    --oidc-token-audience=**https://your-cloud-function-url**
+    --oidc-token-audience=**https://your-cloud-function-url** \
+    --oidc-token-header=**"Content-Type: application/json"**
 
 <br />
 
