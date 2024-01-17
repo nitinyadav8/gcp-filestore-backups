@@ -215,12 +215,35 @@ gcloud scheduler jobs create http **fsbackupdeleteschedule** \
 <br />
 
 Cloud Scheduler fsbackupschedule will invoke Cloud Function to Backup GCP Filestore Instance as per schedule OR Force Run scheduler job to inoke on-demand backup.
+<br />
 
 To create an adhoc backup using CURL, make a POST request with the following parameters:
+<br />
 
 source_instance_name: The name of the source instance.
 source_file_share_name: The name of the source file share.
+<br />
 
 Example API call using curl: <br />
 
 **curl -X POST "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"**
+<br />
+
+Example list backups REST API call using curl:
+<br />
+
+**curl -X GET "https://your-cloud-function-url" -H "Content-Type: application/json" -d "source_instance_name=your-instance-name"**
+<br />
+
+<br />
+To delete the backups post retention, make a GET request with the following parameters:
+<br />
+
+- `retention_days`: share the retention days in numeric value.
+<br />
+
+Example delete backups REST API call using curl:
+
+**curl -X DELETE "https://your-cloud-function-url" -H "Content-Type: application/json" -d "retention_days=numeric-value"**
+<br />
+<br />
