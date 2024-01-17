@@ -3,9 +3,46 @@ Google Cloud Filestore Backup Management
 
 Author: Nitin Yadav
 
-Source Code: https://github.com/nitinyadav8/gcp-filestore-backups/tree/main
-
 This script provides functions for creating on-demand Google Cloud Filestore backups.
+
+## Source Code
+
+The source code for this script is available on GitHub:
+
+[Google Cloud Filestore Backups](https://github.com/nitinyadav8/gcp-filestore-backups)
+
+## Configuration
+
+Before using the script, make sure to set the following configurations:
+
+**PROJECT_ID**: Enter your Google Cloud Project ID.
+**SOURCE_INSTANCE_ZONE**: Provide the source instance zone.
+**BACKUP_REGION**: Provide the target backup region.
+
+## ENTRYPOINT
+
+**Entry point**: main
+
+## Usage
+
+### Creating Backups
+
+To create a backup, make a POST request with the following parameters:
+
+- `source_instance_name`: The name of the source instance.
+- `source_file_share_name`: The name of the source file share.
+
+Example API call using curl:
+
+```bash
+curl -X POST "https://your-cloud-function-url" -d "source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"
+
+Example API call using Cloud Scheduler:
+
+Trigger_URL: "https://your-cloud-function-url?source_instance_name=your-instance-name&source_file_share_name=your-file-share-name"
+
+METHOD: POST
+
 """
 
 import google.auth
@@ -14,9 +51,9 @@ import time
 import requests
 import json
 
-PROJECT_ID = 'ENTER PROJECT ID'
-SOURCE_INSTANCE_ZONE = 'PROVIDE SOURCE INSTANCE ZONE'
-BACKUP_REGION = 'PROVIDE TARGET BACKUP REGION'
+PROJECT_ID = 'Enter your Google Cloud Project ID'
+SOURCE_INSTANCE_ZONE = 'Provide the source instance zone'
+BACKUP_REGION = 'Provide the target backup region'
 
 def get_backup_id(source_instance_name):
     return f"{source_instance_name}-backup-{time.strftime('%Y%m%d-%H%M%S')}"
