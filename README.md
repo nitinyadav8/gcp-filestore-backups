@@ -22,7 +22,9 @@ The solution leverages Cloud Function and Cloud Scheduler to automate the proces
 ● discarding any old backups beyond a certain number of days **[USING SEPARETE CLOUD FUNCTION FOR BACKUPS DELETION - CODE IS UNDER TESTING TO HAVE ALL FUNCTIONALITY WITHIN A SINGLE CLOUD FUNCTION]**
 
 
+
 **Configuration**
+
 
 Before using the script, ensure that you have configured the necessary parameters. List the configuration variables and provide instructions on how to set them. Example:
 
@@ -31,6 +33,7 @@ Before using the script, ensure that you have configured the necessary parameter
 **SOURCE_INSTANCE_ZONE**: Provide the source instance zone.
 
 **BACKUP_REGION**: Provide the target backup region.
+
 
 
 **Solution Component: Cloud Scheduler**
@@ -52,7 +55,9 @@ Cloud Scheduler will be leveraged to invoke Cloud Function. Cloud Scheduler Jobs
 
 **Solution Implementation**
 
+
 **GCP Pre-requisites**:
+
 
 1. Enable the **Cloud Scheduler**, **Cloud Functions**, and **Filestore APIs**
    
@@ -73,6 +78,7 @@ Cloud Scheduler will be leveraged to invoke Cloud Function. Cloud Scheduler Jobs
    You may restrict to the least IAM privelges as required instead the Admin and Editor priveleges.
    
 7. Verify or Grant the Service Account the role of **cloudscheduler.serviceAgent** on **service-$PROJECT_NUMBER@gcp-sa-cloudscheduler.iam.gserviceaccount.com**
+
 
 
 **Deploy Cloud Function**
@@ -115,6 +121,7 @@ The solution is verified with **Python runtime 3.10**
    
    **urllib3==1.25.11**
    
+
 
 
 **Deploy Cloud Scheduler**
