@@ -169,6 +169,7 @@ You may create scheduler job using Google Cloud Console OR via CLI as below:<br 
 
 
 1. **Schedule a Filestore backup every 4 hours**:<br />
+<br />
 
 gcloud scheduler jobs create http **fsbackupschedule** \
     --schedule "0 */4 * * *" \
@@ -177,11 +178,15 @@ gcloud scheduler jobs create http **fsbackupschedule** \
     --oidc-service-account-email=**SERVICE ACCOUNT CREATED EARLIER**    \
     --oidc-token-audience=**https://your-cloud-function-url** \
     --oidc-token-header=**"Content-Type: application/json"**
+<br />
 
 **Note: You need to create Scheduler Job for each Filestore Instance which you want to backup.**
 <br />
 
+<br />
+
 2. **Schedule to identify backups for deletion once retention is over every 12 hours**:<br />
+<br />
 
 gcloud scheduler jobs create http **fsbackupdeleteschedule** \
     --schedule "0 */12 * * *" \
