@@ -6,7 +6,7 @@
 **Author: Nitin Yadav**
 <br />
 
-This script provides functions for creating on-demand Google Cloud Filestore backups using only a single Cloud Function to backup multiple GCP Filestore instances using API calls with help of Cloud Scheduler.
+This script provides functions for creating on-demand Google Cloud Filestore backups using a single modular Cloud Function to backup multiple GCP Filestore instances. It utilizes the GCP Cloud Scheduler for API Calls and runtime parameters. <br />
 
 <br />
 
