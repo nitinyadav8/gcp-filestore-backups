@@ -52,7 +52,7 @@ Before using the script, ensure that you have configured the necessary parameter
 
 <br />
 
-**Solution Component: Cloud Scheduler** <br />
+**Solution Component: Cloud Function** <br />
 
 
 A Cloud Function will be created with an HTTP trigger to interact with the Google Cloud Filestore APIs. This function will facilitate the initiation of on-demand backups, retrieval of specific backup run statuses, and the removal of older backups as needed.
